@@ -3,6 +3,7 @@ package com.example.buscadordecep.view
 import BLUE
 import WHITE
 import android.annotation.SuppressLint
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,18 +22,22 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.buscadordecep.components.ButtonCustom
 import com.example.buscadordecep.components.OutlinedTextFieldCustom
+import com.example.buscadordecep.listener.RespostaApi
+import com.example.buscadordecep.viewmodel.BuscarCepViewModel
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun BuscarCep(navController: NavController) {
+fun BuscarCep(navController: NavController, viewModel: BuscarCepViewModel = hiltViewModel()) {
 
     Scaffold(
         topBar = {
@@ -45,6 +50,8 @@ fun BuscarCep(navController: NavController) {
             )
         }
     ) {
+
+        val context = LocalContext.current
 
         var inputCep by remember{
             mutableStateOf("")
@@ -90,7 +97,21 @@ fun BuscarCep(navController: NavController) {
                 )
                 ButtonCustom(
                     onClick = {
+                              viewModel.respostaApi(inputCep, object : RespostaApi{
+                                  override fun onSucess(
+                                      logradouro: String, bairro: String, cidade: String, estado: String) {
+                                      inputLogradouro = logradouro
+                                      inputBairro = bairro
+                                      inputCidade = cidade
+                                      inputEstado = estado
+                                  }
 
+                                  override fun onFailure(erro: String) {
+                                      Toast.makeText(context, erro, Toast.LENGTH_SHORT).show()
+                                  }
+
+                              }
+                              )
                          },
                     text = "Buscar Cep",
                     modifier = Modifier

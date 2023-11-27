@@ -1,6 +1,6 @@
 package com.example.buscadordecep.model
 
-data class Address(
+data class Endereco(
     val logradouro: String? = null,
     val bairro: String? = null,
     val localidade: String? = null,
