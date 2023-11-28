@@ -1,6 +1,6 @@
 # BuscadorCep
-Projeto Buscador de Cep em Compose. 
-
+Aplicativo feito com arquitetura moderna, Jetpack Compose e as principais tecnologias do android.
+O aplicativo tem como objetivo buscar um endereço atraves do cep, consumindo api viacep.
 
 
 ## :camera_flash: Screenshots
@@ -13,7 +13,8 @@ Projeto Buscador de Cep em Compose.
 * Retrofit
 * Mvvm
 * Navigation
-* Coroutines    
+* Coroutines
+* Hilt    
 - Components de UI
     - AppBar     
     - Button
