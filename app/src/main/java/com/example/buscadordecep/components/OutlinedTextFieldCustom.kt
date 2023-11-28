@@ -1,6 +1,6 @@
 package com.example.buscadordecep.components
 
-import BLUE
+import ORANGE
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
@@ -24,9 +24,9 @@ import androidx.compose.ui.Modifier
                 Text(text = label)
             },
             colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = BLUE,
-                cursorColor = BLUE,
-                focusedLabelColor = BLUE
+                focusedBorderColor = ORANGE,
+                cursorColor = ORANGE,
+                focusedLabelColor = ORANGE
             ),
             modifier = modifier,
             keyboardOptions = keyboardOptions,

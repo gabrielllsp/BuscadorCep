@@ -1,6 +1,6 @@
 package com.example.buscadordecep.view
 
-import BLUE
+import ORANGE
 import WHITE
 import android.annotation.SuppressLint
 import android.widget.Toast
@@ -46,14 +46,14 @@ fun BuscarCep(navController: NavController, viewModel: BuscarCepViewModel = hilt
                     Text(text = "Buscador de Cep", fontSize = 18.sp)
                 },
                 contentColor = WHITE,
-                backgroundColor = BLUE
+                backgroundColor = ORANGE
             )
         }
     ) {
 
         val context = LocalContext.current
 
-        var inputCep by remember{
+        var inputCep by remember {
             mutableStateOf("")
         }
 
@@ -61,15 +61,15 @@ fun BuscarCep(navController: NavController, viewModel: BuscarCepViewModel = hilt
             mutableStateOf("")
         }
 
-        var inputBairro by remember{
+        var inputBairro by remember {
             mutableStateOf("")
         }
 
-        var inputCidade by remember{
+        var inputCidade by remember {
             mutableStateOf("")
         }
 
-        var inputEstado by remember{
+        var inputEstado by remember {
             mutableStateOf("")
         }
 
@@ -85,7 +85,7 @@ fun BuscarCep(navController: NavController, viewModel: BuscarCepViewModel = hilt
                 OutlinedTextFieldCustom(
                     value = inputCep,
                     onValue = {
-                              inputCep = it
+                        inputCep = it
                     },
                     label = "Cep",
                     modifier = Modifier
@@ -97,29 +97,30 @@ fun BuscarCep(navController: NavController, viewModel: BuscarCepViewModel = hilt
                 )
                 ButtonCustom(
                     onClick = {
-                              viewModel.respostaApi(inputCep, object : RespostaApi{
-                                  override fun onSucess(
-                                      logradouro: String, bairro: String, cidade: String, estado: String) {
-                                      inputLogradouro = logradouro
-                                      inputBairro = bairro
-                                      inputCidade = cidade
-                                      inputEstado = estado
-                                  }
+                        viewModel.respostaApi(inputCep, object : RespostaApi {
+                            override fun onSucess(
+                                logradouro: String, bairro: String, cidade: String, estado: String,
+                            ) {
+                                inputLogradouro = logradouro
+                                inputBairro = bairro
+                                inputCidade = cidade
+                                inputEstado = estado
+                            }
 
-                                  override fun onFailure(erro: String) {
-                                      Toast.makeText(context, erro, Toast.LENGTH_SHORT).show()
-                                  }
+                            override fun onFailure(erro: String) {
+                                Toast.makeText(context, erro, Toast.LENGTH_SHORT).show()
+                            }
 
-                              }
-                              )
-                         },
+                        }
+                        )
+                    },
                     text = "Buscar Cep",
                     modifier = Modifier
                         .padding(0.dp, 59.dp, 20.dp, 10.dp)
                         .height(55.dp)
                 )
             }
-            Column (modifier = Modifier.fillMaxWidth()){
+            Column(modifier = Modifier.fillMaxWidth()) {
                 OutlinedTextFieldCustom(
                     value = inputLogradouro,
                     onValue = {
@@ -178,6 +179,12 @@ fun BuscarCep(navController: NavController, viewModel: BuscarCepViewModel = hilt
 
                 ButtonCustom(
                     onClick = {
+                        if (inputCep.isEmpty() || inputLogradouro.isEmpty() || inputBairro.isEmpty() || inputCidade.isEmpty() || inputEstado.isEmpty()) {
+                            Toast.makeText(context, "Preencha todos os campos", Toast.LENGTH_SHORT)
+                                .show()
+                        } else {
+                            navController.navigate("detalhesEndereco/${inputLogradouro}/${inputBairro}/${inputCidade}/${inputEstado}")
+                        }
 
                     },
                     text = "Avançar",

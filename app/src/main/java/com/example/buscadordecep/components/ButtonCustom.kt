@@ -1,6 +1,6 @@
 package com.example.buscadordecep.components
 
-import BLUE
+import ORANGE
 import WHITE
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Button
@@ -21,7 +21,7 @@ fun ButtonCustom(
     Button(
         onClick,
         colors = ButtonDefaults.buttonColors(
-            backgroundColor = BLUE,
+            backgroundColor = ORANGE
         ),
         modifier = modifier
     ) {

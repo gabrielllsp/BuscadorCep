@@ -3,7 +3,7 @@
 
     <style name="Theme.BuscadorDeCep" parent="android:Theme.Material.Light.NoActionBar">
 
-        <item name="android:statusBarColor">@color/blue</item>
+        <item name="android:statusBarColor">@color/orange</item>
 
     </style>
 </resources>
